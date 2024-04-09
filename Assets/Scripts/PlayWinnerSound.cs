@@ -9,5 +9,6 @@ public class PlayWinnerSound : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         sound.Play();
+        collision.gameObject.SetActive(false);
     }
 }

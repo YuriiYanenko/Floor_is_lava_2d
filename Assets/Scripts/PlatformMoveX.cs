@@ -1,28 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformMoveX : MonoBehaviour
 {
-    private bool isPosDirection = true;
+    public float speed;
+    public int startPoint = 0;
+    public Transform[] points;
     // Update is called once per frame
-
+    private int i = 0;
     private void Start()
     {
-        
+        transform.position = points[startPoint].position;
     }
 
     void Update()
     {
-        float posX = transform.position.x;
-        if (posX <= -6.5f || posX >= -4.5f)
-            ToggleDirection();
-        float move = isPosDirection? 0.002f : -0.002f;
-        transform.position += new Vector3(move, 0f, 0f);
+        if (Vector2.Distance(transform.position, points[i].position) < 0.02f)
+        {
+            i = i == points.Length-1 ? 0 : ++i;
+            
+        }
+        transform.position = Vector2.MoveTowards(
+                                        transform.position,
+                                        points[i].position,
+                                        speed * Time.deltaTime);
     }
 
-    void ToggleDirection()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        isPosDirection = !isPosDirection;
+        other.transform.SetParent(transform);
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        other.transform.SetParent(null);
     }
 }

@@ -10,7 +10,7 @@ public class Respawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        
     }
 
     // Update is called once per frame
@@ -21,6 +21,7 @@ public class Respawn : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         sound.Play();
         Teleport();
     }

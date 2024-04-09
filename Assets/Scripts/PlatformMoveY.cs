@@ -17,7 +17,7 @@ public class PlatformMoveY : MonoBehaviour
         float posY = transform.position.y;
         if (posY <= -1.5f || posY >= 0.5f)
             ToggleDirection();
-        float move = isPosDirection ? 0.002f : -0.002f;
+        float move = isPosDirection ? 0.03f : -0.03f;
         transform.position += new Vector3(0f, move, 0f);
     }
 
